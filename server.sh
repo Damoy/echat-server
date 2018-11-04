@@ -1,2 +1,2 @@
 #!/bin/sh
-iex -S chatserver.exs
+elixir ./chat.ex
