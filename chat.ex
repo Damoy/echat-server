@@ -69,9 +69,18 @@ defmodule ChatServer do
                 Process.exit(userToDelete.socket, :closed);
                 innerMain(users);
             :updateIdle -> # updates idle time of all users
-                Log.message("Update idle time !");
 
-                # --------- Trials for idle time force disconnection---------
+                # --------- Trials for idle time force disconnection ---------
+
+                # {:ok, toRemoveAgent} = Agent.start_link(fn -> [] end);
+
+                # Enum.each users, fn user ->
+                #     if user.idleTime >= Timeout.maxIdle do
+                #         Message.write_line(user.socket, ">> You have been afk for too long. Force disconnection !");
+                #         Log.message(">> #{user.pseudo} afk for too long. Force disconnection.");
+                #         Agent.update(toRemoveAgent, fn usersToDelete -> usersToDelete ++ [user]);
+                #     end
+                # end
 
                 # newUsersList = [];
                 # for i <- 0..3 do
@@ -109,6 +118,7 @@ defmodule ChatServer do
                 #             Process.exit(user.socket, :closed);
                 #     end
                 # end
+                # -------------------------------------------------------------
 
                 # update new users list and recurse
                 innerMain(users);
